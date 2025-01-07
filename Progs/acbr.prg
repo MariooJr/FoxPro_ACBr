@@ -5,7 +5,11 @@ DEFINE CLASS ACBr as Custom
       this.AddProperty("CodRetorno", "")
       this.AddProperty("pasta_pdf" ,"")
       this.AddProperty("Titulos"   , 0)
+      this.AddProperty("ult_nossonumero","")
+      this.AddProperty("Cedente","")
+      
       this.AddObject("Models","Model")
+      *this.AddObject("Cedente","Custom")
       
    ENDPROC 
    
@@ -94,6 +98,9 @@ DEFINE CLASS ACBr as Custom
    
    this.CodRetorno = BOLETO_ConfigurarDados(CedenteIni)
    this.UltRetorno = UltimoRetorno()
+   IF this.CodRetorno >=0 
+      this.Cedente = CedenteIni
+   ENDIF 
    
    ENDPROC 
    
@@ -106,14 +113,14 @@ DEFINE CLASS ACBr as Custom
    PROCEDURE AdicionarTitulo
    LPARAMETERS Sacado as Object, Avalista as Object, Titulo as Object
    SET POINT TO ","
-   TEXT TO CedenteIni NOSHOW TEXTMERGE PRETEXT 7
+   TEXT TO TituloIni NOSHOW TEXTMERGE PRETEXT 7
     [Titulo1]
 	NumeroDocumento=<<Titulo.NumeroDocumento>>
 	NossoNumero=<<Titulo.NossoNumero>>
 	NossoNumeroCorrespondente=
 
 	Carteira=<<Titulo.Carteira>>
-	ValorDocumento=<<Titulo.ValorDocumento
+	ValorDocumento=<<ALLTRIM(STR(Titulo.ValorDocumento,15,2))>>
 	Vencimento=<<Titulo.Vencimento>>
 	DataDocumento=<<Titulo.DataDocumento>>
 	DataProcessamento=<<Titulo.DataProcessamento>>
@@ -188,8 +195,25 @@ DEFINE CLASS ACBr as Custom
 	TipoDesconto=<<Titulo.TipoDesconto>>
 	TipoDesconto2=<<Titulo.TipoDesconto2>>
 	CarteiraEnvio=<<Titulo.CarteiraEnvio>>
-   
    ENDTEXT 
    SET POINT TO "."
+   
+   
+   ?BOLETO_ConfigurarDados(this.Cedente)
+   
+   this.CodRetorno = Boleto_IncluirTitulos(TituloIni,"")
+   this.UltRetorno = UltimoRetorno()
+   
+   IF this.CodRetorno < 0
+      RETURN .F.
+   ENDIF
+   this.Titulos = Boleto_TotalTitulosLista()
+   nossoNumeroAcbr = SPACE(20)
+   Boleto_MontarNossoNumero(this.Titulos - 1,@nossoNumeroAcbr,20)
+   nossoNumeroAcbr = STRTRAN( SUBSTR( ALLTRIM(nossoNumeroAcbr ),5,10) , "-","")
+   this.ult_nossonumero = nossoNumeroAcbr
+   
+   RETURN .t. 
+   
    ENDPROC 
 ENDDEFINE
