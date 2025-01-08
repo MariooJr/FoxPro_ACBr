@@ -3,8 +3,16 @@ Aplicativo para utilização da DLL ACBr Boleto com Visual FoxPro
 
 Ainda está em fase de testes, não utilizar.
 
+------------
+### O que é o ACBr?
+É Projeto de Código Aberto (gratuito), de Componentes e Programas destinados ao desenvolvimento de Aplicações do segmento de Automação Comercial.
 
-Exemplo de Uso
+Possui um Fórum com uma comunidade vibrante e engajada, com mais de 75.000 usuários que produzem centenas de novas postagens diariamente. O conteúdo do fórum é uma grande base de conhecimento e respostas, sendo referência em pesquisas na internet sobre Automação Comercial.
+
+Todas as informações sobre o projeto ACBr pode ser encontrada no [Site Oficial](https://projetoacbr.com.br/sobre/ "Site Oficial")
+------------
+
+### Exemplo de Uso
 ```
 acbr = NEWOBJECT("ACBr")
 acbr.CarregarDll(pathDll, pathIni, pathLogs, pathLogos )
