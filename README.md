@@ -1,4 +1,4 @@
-[teste5.pdf](https://github.com/user-attachments/files/18349178/teste5.pdf)# FoxPro_ACBr
+# FoxPro_ACBr
 Aplicativo para utilização da DLL ACBr Boleto com Visual FoxPro
 
 Para utilizar baixe a ultima versão do App
