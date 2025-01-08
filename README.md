@@ -13,6 +13,8 @@ Possui um Fórum com uma comunidade vibrante e engajada, com mais de 75.000 usu�
 
 Todas as informações sobre o projeto ACBr pode ser encontrada em [Site Oficial](https://projetoacbr.com.br/sobre/ "Site Oficial") | [Discord](https://discord.com/invite/acbr "Discord") | [Telegram](https://t.me/ACBrDev "Telegram")
 
+Documentação da Biblioteca de Boletos ACBr: [Link](https://acbr.sourceforge.io/ACBrLib/SobreaACBrLibBoleto.html) "Link")
+
 ------------
 
 ### Exemplo de Uso
