@@ -24,8 +24,28 @@ Sacado        = ACBr.models.Pessoa()
 Avalista      = ACBr.models.Pessoa()
 Titulo        = ACBr.models.Titulo()
 
+*Preencher os dados do Cedente de acordo com os [Indices](https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#avalista-cedente-sacado "Indices")
+Cedente.Nome = "RAZAO SOCIAL"
+...
+
+*Preencher os dados da Conta Corrente de acordo com os [Indices](https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#conta-corrente "Indices")
+ContaCorrente.Conta = "12345"
+...
+
 acbr.Configurar_Cedente(Cedente, ContaCorrente)
 acbr.Limpar_Lista()
+
+
+*Preencher os dados do Sacado e Avalista de acordo com os [Indices](https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#avalista-cedente-sacado "Indices")
+Sacado.Nome = "RAZAO SOCIAL"
+...
+
+Avalista.Nome = "RAZÃO SOCIAL"
+...
+
+*Preencher os dados do Titulo de acordo com os Indices
+Titulo.NossoNumero = "000001"
+...
 
 acbr.AdicionarTitulo(Sacado, Avalista, Titulo)
 
@@ -62,3 +82,8 @@ acbr.GerarRemessa()
 | Carteira  | C  | Nº da Carteira  |   |
 | NumeroCorrespondente   | C  | Nºdo Correspondende Bancário  |   |
 | ImprimirMensagemPadrao  | C | Imprimir as mensagens no corpo do boleto  |  0 - Não<br/>1 - Sim |
+
+### Titulo
+|  Propriedade | Tipo  |Descrição   |Exemplo   |
+| ------------ | ------------ | ------------ | ------------ |
+| ...  | C  | ...  | ...  |
