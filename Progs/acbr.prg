@@ -13,6 +13,10 @@ DEFINE CLASS ACBr as Custom
       
    ENDPROC 
    
+   PROCEDURE Destroy
+      Boleto_Finalizar()
+   ENDPROC 
+   
    ***************************************************************************************
    ** Carrega a DLL com todos os seus metodos                                            *
    **                                                                                    *
@@ -34,10 +38,10 @@ DEFINE CLASS ACBr as Custom
          RETURN 0
       ENDIF 
       
-      ?Boleto_ConfigGravarValor("BoletoBancoFCFortesConfig","DirLogo", pathLogos)
-      ?Boleto_ConfigGravarValor("Principal","TipoResposta","0")
-      ?Boleto_ConfigGravarValor("Principal","LogNivel","4")
-      ?Boleto_ConfigGravarValor("Principal","LogPath", pathLogs)
+      Boleto_ConfigGravarValor("BoletoBancoFCFortesConfig","DirLogo", pathLogos)
+      Boleto_ConfigGravarValor("Principal","TipoResposta","0")
+      Boleto_ConfigGravarValor("Principal","LogNivel","4")
+      Boleto_ConfigGravarValor("Principal","LogPath", pathLogs)
       
    ENDPROC 
    
@@ -206,10 +210,12 @@ DEFINE CLASS ACBr as Custom
    *******************************************************************************************
    ** Gera o PDF e Imprimi os titulos adicionados a lista                                    *
    **                                                                                        * 
-   ** Cedente       => Objeto com os dados do Cedente                                        *
-   ** ContaCorrente => Objeto com os dados da Conta Corrente, Banco e Carteira               *                    
+   ** mostrarTela    => Define se o boleto será exibido na tela antes da impressão           *
+   ** nomeImpressora => Nome da Impressora que será enviado os boletos                       *
+   ** pastaPdf       => Pasta onde ficará salvo o arquivo PDF                                *
+   ** nomePdf        => Nome do Arquivo PDF, Ex: "Boleto.pdf"                                *                    
    *******************************************************************************************     
-   PROCEDURE Limpar_Lista
+   PROCEDURE Imprimir
    LPARAMETERS mostrarTela as String, nomeImpressora as String, pastaPdf as String, nomePdf as String
    
    &&Configuração se vai exibir o boleto na tela antes de imprimir ou não
