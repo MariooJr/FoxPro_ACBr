@@ -1,9 +1,10 @@
 # FoxPro_ACBr
 Aplicativo para utilização da DLL ACBr Boleto com Visual FoxPro
 
-Para utilizar baixe a ultima versão
+Para utilizar baixe a ultima versão do App
 [Ultima Versão](https://github.com/MariooJr/FoxPro_ACBr/blob/main/acbr_boletos.app "Ultima Versão")
 
+Baixe tambem as DLLs do ACBr ou então compile utilizando os fontes do site ACBr.
 ------------
 ### O que é o ACBr?
 É Projeto de Código Aberto (gratuito), de Componentes e Programas destinados ao desenvolvimento de Aplicações do segmento de Automação Comercial.
