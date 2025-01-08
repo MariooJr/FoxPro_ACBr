@@ -1,4 +1,4 @@
-# FoxPro_ACBr
+[teste5.pdf](https://github.com/user-attachments/files/18349178/teste5.pdf)# FoxPro_ACBr
 Aplicativo para utilização da DLL ACBr Boleto com Visual FoxPro
 
 Para utilizar baixe a ultima versão do App
@@ -63,6 +63,7 @@ acbr.Imprimir("0", "Microsoft Print to PDF", "C:\boletos\", "Boleto.PDF")
 
 ## Indices para preenchimento dos componentes
 ------------
+
 ### Avalista, Cedente, Sacado
 |  Propriedade | Tipo  |Descrição   |Exemplo   |
 | ------------ | ------------ | ------------ | ------------ |
@@ -94,4 +95,78 @@ acbr.Imprimir("0", "Microsoft Print to PDF", "C:\boletos\", "Boleto.PDF")
 ### Titulo
 |  Propriedade | Tipo  |Descrição   |Exemplo   |
 | ------------ | ------------ | ------------ | ------------ |
-| ...  | C  | ...  | ...  |
+| NumeroDocumento  | C  | Numero Interno  |   |
+| NossoNumero | C  | Numero do Boleto |   |
+| Carteira  | C  | Carteira de emissão dos boletos |   |
+| ValorDocumento  | N  | Valor do Boleto  | 10.00  |
+| ValorDesconto  | N  | Valor do Desconto | 10.00  |
+| Vencimento  | C  | Vencimento do Boleto |    |
+| DataDocumento  | C  | Data que foi emitido Boleto |   |
+| DataProcessamento  | C  | Data que esta sendo processado |   |
+| LocalPagamento  | C  | Informação de onde se deve pagar o titulo |   |
+| Especie  | C  | Espécie do documento | DM  |
+| EspecieMod | C  |  |  R$ |
+| Mensagem1  | C  | Mensagem que será exibida no corpo do boleto |   |
+| Mensagem2  | C  | Mensagem que será exibida no corpo do boleto |   |
+| Mensagem3  | C  | Mensagem que será exibida no corpo do boleto |   |
+| CodigoMora | C  | Orientação para cobrança de Mora  | 1 - Valor Diário<br/>2 - Taxa % Mensal  |
+| ValorMoraJuros | N  | Valor do Juros | 1.00 |
+| DataMoraJuros  | C  | Data para cobrança de Juros |   |
+| Instrucao1  | C  | Instrução para cobrança do boleto, verificar no layout do banco |   |
+| Instrucao2  | C  | Instrução para cobrança do boleto, verificar no layout do banco |   |
+| Instrucao3  | C  | Instrução para cobrança do boleto, verificar no layout do banco |   |
+| Aceite | C  |  Tipo de Aceite para o Boleto |  0 - Sim<br/>1 - Não |
+| Parcela | C  | Numero da Parcela  |   |
+| TotalParcelas  | C  | Total de Parcelas |   |
+|  CarteiraEnvio | C  |  Carteira de Envio de Remessa|   |
+| SeuNumero  | C  | Numero Interno |   |
+
+------------
+
+## Métodos
+------------
+### CarregarDll
+Carrega todos os metodos da Biblioteca para a memória e faz as configurações iniciais para uso.
+
+|  Parametros | Tipo  |Descrição   |Exemplo   |
+| ------------ | ------------ | ------------ | ------------ |
+| pathDll   | C | Caminho da DLL do ACBr  | C:\ACBr\AcbrBoleto32.dll |
+| pathIni   | C | Caminho onde ficará salvo o arquivo Ini das Configurações | C:\ACBr\FoxAcbr.ini <br/>Não é obrigatório |
+| pathLogs  | C | Caminho onde os logs da biblioteca serão salvos | C:\ACBr\Logs\ <br/> Não é obrigatório |
+| pathLogos | C | Pasta com os logos dos boletos | C:\ACBr\Logos\Coloridos\ |
+
+### Configurar_Cedente
+Configura o Cedente e a Conta Corrente que será usada na emissão dos boletos
+
+|  Parametros | Tipo  |Descrição   |
+| ------------ | ------------ | ------------ |
+| Cedente | Object  | Objeto com as configurações do Cedente |
+| ContaCorrente | Object  | Objeto com as configurações da Conta Corrente |
+
+### Limpar_Lista
+Limpa a lista de todos os titulos adicionados na biblioteca.
+Para gerar PDF individual deve limpar a lista antes de inserir cada titulo.
+Para gera um PDF com mais de 1 boleto, não limpar a lista antes de inserir cada titulo, mesma situação para gerar o arquivo de remessa.
+
+### Adicionar_Titulo
+Adicona um titulo um tituno na biblioteca, sempre que adicionar verificar as propriedades CodRetorno e UltRetorno
+Caso o CodRetorno for menor que zero, é porque teve algum erro ao adicionar o titulo, a descrição do erro está na propriedade UltRetorno
+
+Depois do titulo adicionado, o Nosso Numero formatado de acordo com os padroes do banco está salvo na propriedade UltNossoNumero, caso voce desejar salvar para uso futuro.
+
+|  Parametros | Tipo  |Descrição   | Obrigatório |
+| ------------ | ------------ | ------------ | ------------ |
+| Sacado   | Object | Objeto com os dados do Sacado   | SIM |
+| Avalista | Object | Objeto com os dados do Avalista | NÃO |
+| Titulo   | Object | Objeto com os dados do Titulo   | SIM |
+
+
+### Imprimir
+Imprimir e Gerar o PDF de todos os titulos adicionados na lista.
+
+|  Parametros | Tipo  |Descrição   | Exemplo |
+| ------------ | ------------ | ------------ | ------------ |
+| mostrarTela    | C | Se o boleto será exibido na tela antes de imprimir   | 0 - Não<br/>1 - Sim |
+| nomeImpressora | C | Nome da Impressora para enviar os boletos | Passar vazio para nao imprimir |
+| pastaPdf       | C | Pasta onde ficarão salvos os arquivos PDF   | Passar vazio para nao gerar |
+| nomePdf        | C | Nome do Arquivo PDF   | Passar vazio para nao gerar |
