@@ -125,6 +125,7 @@ acbr.Imprimir("0", "Microsoft Print to PDF", "C:\boletos\", "Boleto.PDF")
 
 ## Métodos
 ------------
+
 ### CarregarDll
 Carrega todos os metodos da Biblioteca para a memória e faz as configurações iniciais para uso.
 
@@ -144,13 +145,13 @@ Configura o Cedente e a Conta Corrente que será usada na emissão dos boletos
 | ContaCorrente | Object  | Objeto com as configurações da Conta Corrente |
 
 ### Limpar_Lista
-Limpa a lista de todos os titulos adicionados na biblioteca.
-Para gerar PDF individual deve limpar a lista antes de inserir cada titulo.
+Limpa a lista de todos os titulos adicionados na biblioteca.<br/>
+Para gerar PDF individual deve limpar a lista antes de inserir cada titulo.<br/>
 Para gera um PDF com mais de 1 boleto, não limpar a lista antes de inserir cada titulo, mesma situação para gerar o arquivo de remessa.
 
 ### Adicionar_Titulo
-Adicona um titulo um tituno na biblioteca, sempre que adicionar verificar as propriedades CodRetorno e UltRetorno
-Caso o CodRetorno for menor que zero, é porque teve algum erro ao adicionar o titulo, a descrição do erro está na propriedade UltRetorno
+Adicona um titulo um tituno na biblioteca, sempre que adicionar verificar as propriedades CodRetorno e UltRetorno.<br/>
+Caso o CodRetorno for menor que zero, é porque teve algum erro ao adicionar o titulo, a descrição do erro está na propriedade UltRetorno.
 
 Depois do titulo adicionado, o Nosso Numero formatado de acordo com os padroes do banco está salvo na propriedade UltNossoNumero, caso voce desejar salvar para uso futuro.
 
