@@ -41,9 +41,45 @@ PARAMETERS cPathDll
 	DECLARE INTEGER Boleto_GerarPDFBoleto        IN &ACBrBoleto32 INTEGER eIndice
 ENDFUNC 
 
-
 FUNCTION UltimoRetorno
    ultRet = SPACE(244)
    Boleto_UltimoRetorno(@ultRet, 244)
    RETURN ALLTRIM(ultRet)
+ENDFUNC 
+
+FUNCTION banco_acbr
+PARAMETERS banco
+
+DO CASE 
+   CASE banco == "001"
+      RETURN "1"
+      
+   CASE banco == "033"
+      RETURN "2"
+      
+   CASE banco == "104"
+      RETURN "3"
+      
+   CASE banco == "237"
+      RETURN "5"
+      
+   CASE banco == "341"
+      RETURN "6"
+      
+   CASE banco == "389"
+      RETURN "7"
+      
+   CASE banco == "748"
+      RETURN "8"
+      
+   CASE banco == "756"
+      RETURN "9"
+      
+   CASE banco == "001"
+      RETURN "041"
+      
+   OTHERWISE 
+      RETURN ""
+ENDCASE 
+
 ENDFUNC 

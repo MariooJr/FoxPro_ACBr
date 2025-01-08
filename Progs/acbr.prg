@@ -93,6 +93,7 @@ DEFINE CLASS ACBr as Custom
    ** Dados do Banco **
    Boleto_ConfigGravarValor("BoletoBancoConfig","Numero",ContaCorrente.Banco)
    *Boleto_ConfigGravarValor("BoletoBancoConfig","CNAB","0") &&& -> 0 - CNAB240 | 1 - CNAB400
+   ContaCorrente.TipoCobranca = banco_acbr(ContaCorrente.Banco)
    Boleto_ConfigGravarValor("BoletoBancoConfig","TipoCobranca",ContaCorrente.TipoCobranca) &&Numero do Banco no ACBr
    
    ENDPROC 
