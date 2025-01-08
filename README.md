@@ -24,11 +24,13 @@ Sacado        = ACBr.models.Pessoa()
 Avalista      = ACBr.models.Pessoa()
 Titulo        = ACBr.models.Titulo()
 
-*Preencher os dados do Cedente de acordo com os [Indices](https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#avalista-cedente-sacado "Indices")
+*Preencher os dados do Cedente de acordo com os Indices
+*https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#avalista-cedente-sacado
 Cedente.Nome = "RAZAO SOCIAL"
 ...
 
-*Preencher os dados da Conta Corrente de acordo com os [Indices](https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#conta-corrente "Indices")
+*Preencher os dados da Conta Corrente de acordo com os Indices
+*https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#conta-corrente
 ContaCorrente.Conta = "12345"
 ...
 
@@ -36,7 +38,8 @@ acbr.Configurar_Cedente(Cedente, ContaCorrente)
 acbr.Limpar_Lista()
 
 
-*Preencher os dados do Sacado e Avalista de acordo com os [Indices](https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#avalista-cedente-sacado "Indices")
+*Preencher os dados do Sacado e Avalista de acordo com os Indices
+*https://github.com/MariooJr/FoxPro_ACBr?tab=readme-ov-file#avalista-cedente-sacado
 Sacado.Nome = "RAZAO SOCIAL"
 ...
 
@@ -44,6 +47,7 @@ Avalista.Nome = "RAZÃO SOCIAL"
 ...
 
 *Preencher os dados do Titulo de acordo com os Indices
+*https://github.com/MariooJr/FoxPro_ACBr#titulo
 Titulo.NossoNumero = "000001"
 ...
 
