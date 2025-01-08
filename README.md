@@ -9,7 +9,7 @@ Ainda está em fase de testes, não utilizar.
 
 Possui um Fórum com uma comunidade vibrante e engajada, com mais de 75.000 usuários que produzem centenas de novas postagens diariamente. O conteúdo do fórum é uma grande base de conhecimento e respostas, sendo referência em pesquisas na internet sobre Automação Comercial.
 
-Todas as informações sobre o projeto ACBr pode ser encontrada no [Site Oficial](https://projetoacbr.com.br/sobre/ "Site Oficial")
+Todas as informações sobre o projeto ACBr pode ser encontrada em [Site Oficial](https://projetoacbr.com.br/sobre/ "Site Oficial") | [Discord](https://discord.com/invite/acbr "Discord") | [Telegram](https://t.me/ACBrDev "Telegram")
 
 ------------
 
