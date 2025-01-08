@@ -8,6 +8,7 @@ Ainda está em fase de testes, não utilizar.
 É Projeto de Código Aberto (gratuito), de Componentes e Programas destinados ao desenvolvimento de Aplicações do segmento de Automação Comercial.
 
 Possui um Fórum com uma comunidade vibrante e engajada, com mais de 75.000 usuários que produzem centenas de novas postagens diariamente. O conteúdo do fórum é uma grande base de conhecimento e respostas, sendo referência em pesquisas na internet sobre Automação Comercial.
+
 Todas as informações sobre o projeto ACBr pode ser encontrada no [Site Oficial](https://projetoacbr.com.br/sobre/ "Site Oficial")
 
 ------------
