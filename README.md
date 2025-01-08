@@ -58,8 +58,7 @@ Titulo.NossoNumero = "000001"
 
 acbr.AdicionarTitulo(Sacado, Avalista, Titulo)
 
-acbr.ImprimirBoletos()
-acbr.GerarRemessa()
+acbr.Imprimir("0", "Microsoft Print to PDF", "C:\boletos\", "Boleto.PDF")
 ```
 
 ## Indices para preenchimento dos componentes
