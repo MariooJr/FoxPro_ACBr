@@ -187,7 +187,7 @@ DEFINE CLASS ACBr as Custom
    ENDTEXT 
    SET POINT TO "."
   
-   this.CodRetorno = Boleto_IncluirTitulos(TituloIni,"I")
+   this.CodRetorno = Boleto_IncluirTitulos(TituloIni,"")
    this.UltRetorno = UltimoRetorno()
    
    IF this.CodRetorno < 0
@@ -201,5 +201,37 @@ DEFINE CLASS ACBr as Custom
    
    RETURN .t. 
    
+   ENDPROC
+ 
+   *******************************************************************************************
+   ** Gera o PDF e Imprimi os titulos adicionados a lista                                    *
+   **                                                                                        * 
+   ** Cedente       => Objeto com os dados do Cedente                                        *
+   ** ContaCorrente => Objeto com os dados da Conta Corrente, Banco e Carteira               *                    
+   *******************************************************************************************     
+   PROCEDURE Limpar_Lista
+   LPARAMETERS mostrarTela as String, nomeImpressora as String, pastaPdf as String, nomePdf as String
+   
+   &&Configuração se vai exibir o boleto na tela antes de imprimir ou não
+   Boleto_ConfigGravarValor("BoletoBancoFCFortesConfig","MostrarPreview", mostrarTela) 
+
+
+   totalTitulos = 0
+   totalTitulos = Boleto_TotalTitulosLista()
+
+   IF totalTitulos = 0
+	  MESSAGEBOX("Nenhum titulo adicionado na lista",0,"Verifique")
+	  RETURN .F.
+   ENDIF 
+
+   IF !EMPTY(ALLTRIM(nomeImpressora))
+      BOLETO_Imprimir(nomeImpressora)
+   ENDIF 
+   
+   IF !EMPTY(ALLTRIM(pastaPdf)) .and. !EMPTY(ALLTRIM(nomePdf))
+      WAIT WINDOW "Gerando PDF " + nomePdf NOWAIT 
+	  Boleto_SetDiretorioArquivo(pastaPdf, nomePdf)
+	  boleto_gerarpdf()
+   ENDIF 
    ENDPROC 
 ENDDEFINE
