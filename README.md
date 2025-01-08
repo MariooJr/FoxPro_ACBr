@@ -15,7 +15,7 @@ Todas as informações sobre o projeto ACBr pode ser encontrada em [Site Oficial
 
 ### Exemplo de Uso
 ```
-acbr = NEWOBJECT("ACBr")
+do acbr_boletos.app
 acbr.CarregarDll(pathDll, pathIni, pathLogs, pathLogos )
 
 Cedente       = ACBr.models.Pessoa()
