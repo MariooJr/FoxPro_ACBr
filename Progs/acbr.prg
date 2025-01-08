@@ -54,53 +54,42 @@ DEFINE CLASS ACBr as Custom
    *******************************************************************************************  
    PROCEDURE Configurar_Cedente
    LPARAMETERS Cedente as Object, ContaCorrente as Object
-   
-   TEXT TO CedenteIni NOSHOW TEXTMERGE PRETEXT 7
-   [Cedente] 
-   Nome=<<Cedente.Nome>>
-   CNPJCPF=<<Cedente.CNPJCPF>>
-   Logradouro=<<Cedente.Logradouro>>
-   Numero=<<Cedente.Numero>>
-   Bairro=<<Cedente.Bairro>>
-   Cidade=<<Cedente.Cidade>>
-   CEP=<<Cedente.Cep>>
-   Complemento=<<Cedente.Complemento>>
-   UF=<<Cedente.UF>>
-   TipoPessoa=<<Cedente.TipoInscricao>>
-   RespEmis=<<ContaCorrente.ResponEmissao>>
-   CodigoCedente=<<ContaCorrente.CodigoCedente>>
-   LayoutBol=3
-   CaracTitulo=<<ContaCorrente.CaracTitulo>>
-   TipoCarteira=<<ContaCorrente.TipoCarteira>>
-   TipoDocumento=<<ContaCorrente.TipoDocumento>>
-   Modalidade=<<ContaCorrente.Modalidade>>
-   CodTransmissao=<<ContaCorrente.CodigoTransmissao>>
-   Convenio=<<ContaCorrente.Convenio>>
-   PIX.TipoChavePix=
-   PIX.Chave=
+      
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "Nome"          , Cedente.Nome)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "TipoInscricao" , Cedente.TipoInscricao)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "CNPJCPF"       , Cedente.CNPJCPF)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "Cidade"        , Cedente.Cidade)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "Logradouro"    , Cedente.Logradouro)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "Bairro"        , Cedente.Bairro)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "NumeroRes"     , Cedente.Numero)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "UF"            , Cedente.UF)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "CEP"           , Cedente.Cep)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "Telefone"      , Cedente.Telefone)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "Complemento"   , Cedente.Complemento)
 
-   [Conta]
-   Conta=<<ContaCorrente.Conta>>
-   DigitoConta=<<ContaCorrente.ContaDigito>>
-   Agencia=<<ContaCorrente.Agencia>>
-   DigitoAgencia=<<ContaCorrente.AgenciaDigito>>
-   DigitoVerificadorAgenciaConta=<<ContaCorrente.DigitoVerificadorAgenciaConta>>
 
-   [Banco]
-   Numero=<<ContaCorrente.Banco>>
-   CNAB=<<ContaCorrente.CNAB>>
-   TipoCobranca=5
-   NumeroCorrespondente=<<ContaCorrente.NumeroCorrespondente>>
-   VersaoArquivo=<<ContaCorrente.VersaoArquivo>>
-   VersaoLote=<<ContaCorrente.VersaoLote>>
-  
-   ENDTEXT 
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "ResponEmissao" , ContaCorrente.ResponEmissao)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "CaracTitulo"   , ContaCorrente.CaracTitulo)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "TipoCarteira"  , ContaCorrente.TipoCarteira)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "TipoDocumento" , ContaCorrente.TipoDocumento)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "Modalidade"    , ContaCorrente.Modalidade)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "Convenio"      , ContaCorrente.Convenio)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "CodigoCedente" , ContaCorrente.CodigoCedente)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig", "CodigoTransmissao" , ContaCorrente.CodigoTransmissao)
+
+   ** Dados da Conta Corrente **
+   Boleto_ConfigGravarValor("BoletoCedenteConfig","Agencia"       , ContaCorrente.Agencia)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig","AgenciaDigito" , ContaCorrente.AgenciaDigito)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig","Conta"         , ContaCorrente.Conta)
+   Boleto_ConfigGravarValor("BoletoCedenteConfig","ContaDigito"   , ContaCorrente.ContaDigito)
    
-   this.CodRetorno = BOLETO_ConfigurarDados(CedenteIni)
-   this.UltRetorno = UltimoRetorno()
-   IF this.CodRetorno >=0 
-      this.Cedente = CedenteIni
-   ENDIF 
+   Boleto_ConfigGravarValor("BoletoCedenteConfig","DigitoVerificadorAgenciaConta"   ,ContaCorrente.DigitoVerificadorAgenciaConta)
+   Boleto_ConfigGravarValor("BoletoDiretorioConfig","ImprimirMensagemPadrao","1")
+
+   ** Dados do Banco **
+   Boleto_ConfigGravarValor("BoletoBancoConfig","Numero",ContaCorrente.Banco)
+   *Boleto_ConfigGravarValor("BoletoBancoConfig","CNAB","0") &&& -> 0 - CNAB240 | 1 - CNAB400
+   Boleto_ConfigGravarValor("BoletoBancoConfig","TipoCobranca",ContaCorrente.TipoCobranca) &&Numero do Banco no ACBr
    
    ENDPROC 
    
@@ -197,11 +186,8 @@ DEFINE CLASS ACBr as Custom
 	CarteiraEnvio=<<Titulo.CarteiraEnvio>>
    ENDTEXT 
    SET POINT TO "."
-   
-   
-   ?BOLETO_ConfigurarDados(this.Cedente)
-   
-   this.CodRetorno = Boleto_IncluirTitulos(TituloIni,"")
+  
+   this.CodRetorno = Boleto_IncluirTitulos(TituloIni,"I")
    this.UltRetorno = UltimoRetorno()
    
    IF this.CodRetorno < 0
