@@ -82,4 +82,63 @@ DO CASE
       RETURN ""
 ENDCASE 
 
-ENDFUNC 
+ENDFUNC
+
+FUNCTION nome_ocorrencia
+LPARAMETERS cCodigo
+
+*!*	01 = Boleto não existe
+*!*	02 = Entrada boleto Confirmada
+*!*	03 = Entrada boleto Rejeitada
+*!*	Layout de Cobrança 400 posições – Padrão Santander
+*!*	29
+*!*	CNAB 400 BC 353 H7800 V 2.30 Fevereiro/2023
+*!*	04 = Transferência para carteira Simples
+*!*	05 = Transferência para Carteira Penhor/Desconto/Cessão
+*!*	06 = Liquidação
+*!*	07 = Liquidação por Conta
+*!*	08 = Liquidação por Saldo
+*!*	09 = Baixa Automática
+*!*	10 = Boleto Baixado Conforme Instrução
+*!*	11 = Boletos em carteira (em ser)
+*!*	12 = Abatimento Concedido
+*!*	13 = Abatimento Cancelado
+*!*	14 = Alteração de Vencimento
+*!*	15 = Confirmação de Protesto*
+*!*	16 = Boleto Baixado/Liquidado
+*!*	17 = Liquidado em Cartório
+*!*	21 = Boleto Enviado a Cartório
+*!*	22 = Boleto Retirado do Cartório
+*!*	24 = Custas de Cartório
+*!*	25 = Boleto Protestado
+*!*	26 = Sustar Protesto*
+*!*	27 = Cancelar Boleto Protestado
+*!*	35 = Boleto DDA Reconhecido pelo Pagador
+*!*	36 = Boleto DDA Não Reconhecido pelo Pagador
+*!*	37 = Boleto DDA Recusado pela CIP
+*!*	38 = Não Protestar (antes de iniciar o ciclo de
+*!*	protesto)
+*!*	39 = Espécie de Boleto não permite a instrução
+*!*	61= Confirmação de Alteração do Valor Nominal do
+*!*	Boleto
+*!*	62 = Confirmação de Alteração do Valor ou
+*!*	Percentual mínimo
+*!*	63 = Confirmação de Alteração do Valor ou
+*!*	Percentual máximo
+*!*	93 = Baixa Operacional Enviado pela CIP
+*!*	94 = Cancelamento da Baixa Operacional Enviado pela Cip
+
+
+DO case
+   CASE cCodigo == "01"
+      RETURN "Boleto não existe"
+   
+   CASE cCodigo == "02"
+      RETURN "Entrada boleto Confirmada"
+   
+   CASE cCodigo == "03" 
+      RETURN "Entrada boleto Rejeitada"
+
+ENDCASE 
+
+ENDFUNC  

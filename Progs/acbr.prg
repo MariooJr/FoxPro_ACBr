@@ -7,7 +7,9 @@ DEFINE CLASS ACBr as Custom
       this.AddProperty("Titulos"   , 0)
       this.AddProperty("ult_nossonumero","")
       this.AddProperty("Cedente","")
+      this.AddProperty("LinhaDigitavel","")
       
+      this.AddProperty("banco","")
       this.AddObject("Models","Model")
       *this.AddObject("Cedente","Custom")
       
@@ -96,6 +98,7 @@ DEFINE CLASS ACBr as Custom
    ContaCorrente.TipoCobranca = banco_acbr(ContaCorrente.Banco)
    Boleto_ConfigGravarValor("BoletoBancoConfig","TipoCobranca",ContaCorrente.TipoCobranca) &&Numero do Banco no ACBr
    
+   this.banco = ContaCorrente.Banco
    ENDPROC 
    
    *******************************************************************************************
@@ -151,7 +154,7 @@ DEFINE CLASS ACBr as Custom
 	Sacado.CEP=<<Sacado.CEP>>
 	Sacado.Email=
 	
-	Sacado.SacadoAvalista.Pessoa=
+	Sacado.SacadoAvalista.Pessoa=<<IIF(EMPTY(Avalista.Pessoa) .and. this.banco $ "033", "3", Avalista.Pessoa) >>
 	Sacado.SacadoAvalista.NomeAvalista=
 	Sacado.SacadoAvalista.CNPJCPF=  
 	Sacado.SacadoAvalista.Logradouro=
@@ -198,12 +201,17 @@ DEFINE CLASS ACBr as Custom
    IF this.CodRetorno < 0
       RETURN .F.
    ENDIF
+   
    this.Titulos = Boleto_TotalTitulosLista()
+   
    nossoNumeroAcbr = SPACE(20)
    Boleto_MontarNossoNumero(this.Titulos - 1,@nossoNumeroAcbr,20)
-   nossoNumeroAcbr = STRTRAN( SUBSTR( ALLTRIM(nossoNumeroAcbr ),5,10) , "-","")
+   *nossoNumeroAcbr = STRTRAN( SUBSTR( ALLTRIM(nossoNumeroAcbr ),5,10) , "-","")
    this.ult_nossonumero = nossoNumeroAcbr
    
+   linhaDigitavel = SPACE(100)
+   Boleto_RetornaLinhaDigitavel(this.Titulos - 1,@linhaDigitavel ,100)
+   this.LinhaDigitavel = linhaDigitavel
    RETURN .t. 
    
    ENDPROC
@@ -240,5 +248,21 @@ DEFINE CLASS ACBr as Custom
 	  Boleto_SetDiretorioArquivo(pastaPdf, nomePdf)
 	  boleto_gerarpdf()
    ENDIF 
+   ENDPROC 
+   
+   PROCEDURE Remessa
+   LPARAMETERS pathArquivo as String, nomeArquivo as String, cnab as Integer, numeroArquivo as Integer
+   
+   **Configurando o arquivo de remessa
+   Boleto_ConfigGravarValor("BoletoDiretorioConfig","LayoutRemessa"  , IIF(cnab == 240, 0, 1))
+   Boleto_ConfigGravarValor("BoletoDiretorioConfig","DirArqRemessa"  , pathArquivo)
+   Boleto_ConfigGravarValor("BoletoDiretorioConfig","NomeArqRemessa" , nomeArquivo)
+   Boleto_ConfigGravarValor("BoletoDiretorioConfig","ImprimirMensagemPadrao","1")
+   Boleto_ConfigGravarValor("BoletoDiretorioConfig","RemoveAcentosArqRemessa","0")
+   Boleto_ConfigGravarValor("BoletoDiretorioConfig","NumeroArquivo",ALLTRIM(STR(numeroArquivo)))
+   Boleto_ConfigGravarValor("BoletoDiretorioConfig","DataArquivo",DTOC(DATE()))   
+   
+   this.CodRetorno = Boleto_GerarRemessa("",numeroRemessa,"")
+   this.ultRetorno = UltimoRetorno()
    ENDPROC 
 ENDDEFINE
